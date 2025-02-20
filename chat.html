@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OhMyCats !</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <header class="header">
+        <h1>OhMyCats !</h1>
+    </header>
+
+    <div class="subheader">
+        <h2>Adoptez un chat trop bon !</h2>
+    </div>
+
+    <main class="main-content">
+        <div class="adoption-section">
+            <h3 class="adoption-title">Les chats à adopter</h3>
+            
+            <form class="adoption-form">
+                <div class="form-group">
+                    <label>Choix du chat :</label>
+                    <select>
+                        <option>-- Sélectionnez --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Raison d'adoption :</label>
+                    <textarea placeholder="Saisissez ici les raisons pour lesquelles vous souhaitez adopter ce chat..."></textarea>
+                </div>
+
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <img src="/api/placeholder/800/450" alt="Chat à adopter">
+                    <div class="carousel-caption">
+                        <h4>Sushi</h4>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-nav prev">‹</button>
+            <button class="carousel-nav next">›</button>
+            <div class="carousel-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </main>
+
+    <section class="info-section">
+        <h3>Nos chats à adopter...</h3>
+        <p>Haec igitur prima lex amicitiae sanciatur, ut ab amicis honesta petamus, amicorum causa honesta faciamus, ne exspectemus quidem, dum rogemur; studium semper adsit, cunctatio absit; consilium vero dare audeamus libere. Plurimum in amicitia amicorum bene suadentium valeat auctoritas, eaque et adhibeatur ad monendum non modo aperte sed etiam acriter, si res postulabit, et adhibitae pareatur.</p>
+        <p>Sed quid est quod in hac causa maxime homines admirentur et reprehendant meum consilium, cum ego idem antea multa decreverim, que magis ad hominis dignitatem quam ad rei publicae necessitatem pertinerent? Supplicationem quindecim dierum decrevi sententia mea. Rei publicae satis erat tot dierum quot C. Mario ; dis immortalibus non erat exigua eadem gratulatio quae ex maximis bellis. Ergo ille cumulus dierum hominis est dignitati tributus.</p>
+    </section>
+
+    <footer class="footer">
+        <img src="images/tete-chat.png" alt="Logo OhMyCats" class="footer-logo">
+        <p>© OhMyCats</p>
+    </footer>
+    <script src="chat.js"></script>
+</body>
+</html>
