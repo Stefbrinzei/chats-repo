@@ -1,6 +1,5 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Configuration du carrousel avec des images placeholder
+    // Configuration du carrousel
     const carouselConfig = {
         images: [
             { src: '/api/placeholder/800/450', caption: 'Sushi' },
@@ -8,28 +7,20 @@ document.addEventListener('DOMContentLoaded', function() {
             { src: '/api/placeholder/800/450', caption: 'Sashimi' },
             { src: '/api/placeholder/800/450', caption: 'Yakitori' },
             { src: '/api/placeholder/800/450', caption: 'Tempura' }
-        ]
+        ],
+        autoplayDelay: 5000 // 5 secondes entre chaque transition
     };
 
     let currentSlide = 0;
+    let autoplayInterval;
     const carousel = document.querySelector('.carousel');
     
-    // Créer la structure initiale du carrousel
+    // Initialiser le carrousel
     function initializeCarousel() {
-        // Vider le carrousel existant
-        carousel.innerHTML = '';
-        
-        // Créer les slides avec position absolute
+        // Créer les slides
         carouselConfig.images.forEach((image, index) => {
             const slide = document.createElement('div');
-            slide.className = 'carousel-slide';
-            
-            // Positionnement initial des slides
-            if (index === 0) {
-                slide.style.display = 'block';
-            } else {
-                slide.style.display = 'none';
-            }
+            slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
             
             slide.innerHTML = `
                 <img src="${image.src}" alt="${image.caption}">
@@ -40,102 +31,96 @@ document.addEventListener('DOMContentLoaded', function() {
             
             carousel.appendChild(slide);
         });
+
+        // Créer les points de navigation
+        const dotsContainer = document.querySelector('.carousel-dots');
+        carouselConfig.images.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.className = `dot ${index === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        // Démarrer l'autoplay
+        startAutoplay();
     }
 
-    // Mettre à jour l'affichage des slides
+    // Gérer l'autoplay
+    function startAutoplay() {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+        }
+        autoplayInterval = setInterval(nextSlide, carouselConfig.autoplayDelay);
+    }
+
+    function stopAutoplay() {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+        }
+    }
+
+    // Mettre à jour les slides
     function updateSlides() {
         const slides = document.querySelectorAll('.carousel-slide');
-        slides.forEach((slide, index) => {
-            if (index === currentSlide) {
-                slide.style.display = 'block';
-            } else {
-                slide.style.display = 'none';
-            }
-        });
-        updateDots();
-    }
-
-    // Mettre à jour les points de navigation
-    function updateDots() {
         const dots = document.querySelectorAll('.dot');
+        
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlide);
+        });
+        
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === currentSlide);
         });
     }
 
-    // Navigation vers une slide spécifique
+    // Navigation
     function goToSlide(index) {
         currentSlide = index;
         updateSlides();
+        stopAutoplay();
+        startAutoplay();
     }
 
-    // Navigation précédente
     function previousSlide() {
         currentSlide = (currentSlide - 1 + carouselConfig.images.length) % carouselConfig.images.length;
         updateSlides();
+        stopAutoplay();
+        startAutoplay();
     }
 
-    // Navigation suivante
     function nextSlide() {
         currentSlide = (currentSlide + 1) % carouselConfig.images.length;
         updateSlides();
+        stopAutoplay();
+        startAutoplay();
     }
 
     // Initialiser le carrousel
     initializeCarousel();
 
-    // Ajouter les écouteurs d'événements pour les boutons de navigation
+    // Ajouter les écouteurs d'événements
     document.querySelector('.prev').addEventListener('click', previousSlide);
     document.querySelector('.next').addEventListener('click', nextSlide);
 
-    // Ajouter les écouteurs pour les points
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
-    });
-
-    // Ajout des styles CSS nécessaires directement dans le JavaScript
-    const carouselStyles = `
-        .carousel {
-            position: relative;
-            width: 100%;
-            height: 450px;
-            overflow: hidden;
-            background: #f5f5f5;
-        }
-        .carousel-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    `;
-
-    // Ajouter les styles au head
-    const styleSheet = document.createElement("style");
-    styleSheet.textContent = carouselStyles;
-    document.head.appendChild(styleSheet);
-
     // Gestion du formulaire
     const form = document.querySelector('.adoption-form');
-    if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = {
-                chat: form.querySelector('select').value,
-                raison: form.querySelector('textarea').value
-            };
-            
-            if (formData.chat && formData.raison) {
-                console.log('Formulaire soumis :', formData);
-                alert('Votre demande d\'adoption a été envoyée !');
-                form.reset();
-            } else {
-                alert('Veuillez remplir tous les champs.');
-            }
-        });
-    }
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = {
+            chat: form.querySelector('select').value,
+            raison: form.querySelector('textarea').value
+        };
+        
+        if (formData.chat && formData.raison) {
+            console.log('Formulaire soumis :', formData);
+            alert('Votre demande d\'adoption a été envoyée !');
+            form.reset();
+        } else {
+            alert('Veuillez remplir tous les champs.');
+        }
+    });
+
+    // Pause de l'autoplay lors du survol
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
 });

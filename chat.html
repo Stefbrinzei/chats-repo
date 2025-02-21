@@ -23,7 +23,12 @@
                 <div class="form-group">
                     <label>Choix du chat :</label>
                     <select>
-                        <option>-- Sélectionnez --</option>
+                        <option value="">-- Sélectionnez --</option>
+                        <option value="sushi">Sushi</option>
+                        <option value="maki">Maki</option>
+                        <option value="sashimi">Sashimi</option>
+                        <option value="yakitori">Yakitori</option>
+                        <option value="tempura">Tempura</option>
                     </select>
                 </div>
 
@@ -38,35 +43,28 @@
 
         <div class="carousel-container">
             <div class="carousel">
-                <div class="carousel-slide">
-                    <img src="/api/placeholder/800/450" alt="Chat à adopter">
-                    <div class="carousel-caption">
-                        <h4>Sushi</h4>
-                    </div>
-                </div>
+                <!-- Les slides seront injectées par JavaScript -->
             </div>
             <button class="carousel-nav prev">‹</button>
             <button class="carousel-nav next">›</button>
             <div class="carousel-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+                <!-- Les points seront injectés par JavaScript -->
             </div>
         </div>
     </main>
 
     <section class="info-section">
         <h3>Nos chats à adopter...</h3>
-        <p>Haec igitur prima lex amicitiae sanciatur, ut ab amicis honesta petamus, amicorum causa honesta faciamus, ne exspectemus quidem, dum rogemur; studium semper adsit, cunctatio absit; consilium vero dare audeamus libere. Plurimum in amicitia amicorum bene suadentium valeat auctoritas, eaque et adhibeatur ad monendum non modo aperte sed etiam acriter, si res postulabit, et adhibitae pareatur.</p>
         <p>Sed quid est quod in hac causa maxime homines admirentur et reprehendant meum consilium, cum ego idem antea multa decreverim, que magis ad hominis dignitatem quam ad rei publicae necessitatem pertinerent? Supplicationem quindecim dierum decrevi sententia mea. Rei publicae satis erat tot dierum quot C. Mario ; dis immortalibus non erat exigua eadem gratulatio quae ex maximis bellis. Ergo ille cumulus dierum hominis est dignitati tributus.</p>
+        <p>Haec igitur prima lex amicitiae sanciatur, ut ab amicis honesta petamus, amicorum causa honesta faciamus, ne exspectemus quidem, dum rogemur; studium semper adsit, cunctatio absit; consilium vero dare audeamus libere. Plurimum in amicitia amicorum bene suadentium valeat auctoritas, eaque et adhibeatur ad monendum non modo aperte sed etiam acriter, si res postulabit, et adhibitae pareatur.</p>
     </section>
 
     <footer class="footer">
-        <img src="images/tete-chat.png" alt="Logo OhMyCats" class="footer-logo">
-        <p>© OhMyCats</p>
+        <div class="footer-content">
+            <p>© OhMyCats</p>
+        </div>
     </footer>
+
     <script src="chat.js"></script>
 </body>
 </html>
